@@ -18,7 +18,7 @@ const NavBar = async () => {
 		<div className={`flex items-center justify-between h-14 px-4 w-full ${is_admin ? null : "bg-slate-200"}`}>
 			<Link href="/" className="font-bold flex items-center justify-between">
 				<Image height={32} width={32} alt="Logo" src="/logo.svg" />
-				<p className="text-lg min-w-fit ml-2 max-sm:hidden">Hostel Premier League</p>
+				<p className="text-lg min-w-fit ml-2 max-sm:hidden">Community Premier League</p>
 			</Link>
 			{
 				!is_admin && 
