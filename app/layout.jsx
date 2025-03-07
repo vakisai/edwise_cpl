@@ -12,7 +12,7 @@ import './globals.css'
 const overpass = Overpass({ subsets: ['latin'],weights:[500,600,700,800,900] })
 
 export const metadata = {
-  title: 'Hostel Premier League',
+  title: 'community Premier League',
   description: 'Immerse yourself in the cricketing extravaganza of Hostel Premier League! Discover the pulse-pounding matches, register your dream team, and stay updated with the latest cricketing buzz. Join the league now!',
 }
 
