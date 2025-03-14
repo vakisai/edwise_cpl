@@ -23,7 +23,7 @@ export default async function Home() {
   const targetDate = new Date('2024-01-14T23:59:59');
 
   return (
-    <div className="w-full flex flex-col items-center relative">
+    <div className="w-full flex flex-col items-center relative mt-20">
       {/*<Dialog />*/}
       {
         session?.user ?  <Verification user={session.user}/> : null

@@ -29,6 +29,9 @@ body {
 .nav-link:hover{
   text-decoration: none;
   box-shadow: 0 2px 0 0 #333;
+  transition: all 0.3s ease-in-out;
+  transform: translateY(-2px);
+  
 }
 
 

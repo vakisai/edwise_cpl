@@ -39,7 +39,7 @@ const TeamPage = async () => {
 
 
 	return (
-		<div className="flex justify-center">
+		<div className="flex justify-center mt-20">
 			<section className="flex flex-col items-center w-3/4">
 				<div className="flex flex-wrap justify-between gap-5 mt-10 relative py-16">
 					<InfoAlert title="Note" description="Please fill the details of the team." />
