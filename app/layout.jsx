@@ -5,7 +5,7 @@ import Provider from "@components/Provider";
 import { EdgeStoreProvider } from "@components/edgestore";
 import { Toaster } from "react-hot-toast";
 // import dynamic from "next/dynamic";
-// import ChatBot from "@components/ChatBot";
+import ChatBot from "@components/ChatBot";
 
 import "./globals.css";
 
@@ -51,6 +51,7 @@ export default function RootLayout({ children }) {
             <Toaster position="top-center" toastOptions={toastOpt} />
             <NavBar />
             {children}
+            <ChatBot />
             <Footer />
           </EdgeStoreProvider>
         </Provider>

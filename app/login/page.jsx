@@ -9,9 +9,9 @@ const Login=()=>(
 		<section className=" relative flex w-[400px] flex-col items-start justify-center py-10 px-5 max-sm:shadow-none shadow-md shadow-slate-600">
 			<div className="flex flex-row mb-4 items-center justify-start">
 				<Image height={32} width={32} alt="Logo" src="/logo.svg" />	
-				<p className="text-lg font-bold ml-2 ">Hostel Premier League</p>
+				<p className="text-lg font-bold ml-2 ">Community Premier League</p>
 			</div>	
-			<p className="font-medium text-md mb-5">SignUp to Hostel Premier League</p>
+			<p className="font-medium text-md mb-5">SignUp to Community Premier League</p>
 		    <div className="w-full mb-6">
 		      <label className='mb-2 text-base font-medium '>
 		        Email
