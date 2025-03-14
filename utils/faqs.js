@@ -1,12 +1,12 @@
 const frequentQuestions = [
   {
     question:
-      "How can I register my cricket team for the Hostel Premier League?",
+      "How can I register my cricket team for the Community Premier League?",
     answer:
       "First you need to signup after that you can fill the details related to team member and size of your team.",
   },
   {
-    question: "Is the registration fee?",
+    question: "Is there a registration fee?",
     answer: "There is no registration fee for the tournament.",
   },
   {

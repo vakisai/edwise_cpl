@@ -177,22 +177,24 @@ export default function ContactUs() {
             ></textarea>
           </div>
         </div>
-        <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
+        <Switch.Group as="div" className="flex gap-x-4 mt-2 sm:col-span-2">
           <Switch
             checked={agreed}
             onChange={setAgreed}
             className={classNames(
-              agreed ? "bg-indigo-600" : "bg-gray-200",
-              "flex w-8 cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition duration-200 ease-in-out"
+              agreed ? "bg-indigo-600" : "bg-gray-300",
+              "relative flex w-10 h-5 cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/10 transition-all duration-300 ease-in-out hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             )}
+            aria-checked={agreed}
           >
             <span
               className={classNames(
-                agreed ? "translate-x-3.5" : "translate-x-0",
-                "h-4 w-4 transform bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out"
+                agreed ? "translate-x-5" : "translate-x-0",
+                "absolute left-0 top-0 h-5 w-5 transform bg-white rounded-full shadow-md ring-1 ring-gray-900/10 transition-all duration-300 ease-in-out"
               )}
             />
           </Switch>
+
           <Switch.Label className="text-sm leading-6 text-gray-600">
             By selecting this, you agree to our{" "}
             <Link
@@ -214,7 +216,7 @@ export default function ContactUs() {
               agreed ? "hover:bg-indigo-600" : "cursor-not-allowed"
             }`}
           >
-            {loading ? "Sending..." : "Let's talk"}
+            {loading ? "Sending..." : "Submit"}
           </button>
         </div>
       </form>

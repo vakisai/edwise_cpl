@@ -44,7 +44,7 @@ export default async function Home() {
           :
           (
             <>
-              <p className="mt-5 text-5xl font-extrabold max-md:text-center max-sm:text-4xl">Welcome to Hostel Premier League</p>
+              <p className="mt-5 text-5xl font-extrabold max-md:text-center max-sm:text-4xl">Welcome to Community Premier League</p>
               <p className=" text-4xl font-extrabold text-indigo-500 max-md:text-center">A Thrilling Cricket Experience</p>
               <p className="text-slate-600 font-medium w-1/2 my-4 max-md:text-center max-sm:w-3/4">Experience the thrill of the game, witness top teams in action, and create lasting memories at this unmissable sporting spectacle.</p>
             </>
@@ -101,7 +101,7 @@ export default async function Home() {
         :null
       }
 
-      <section id="info" className="w-4/5 max-w-7xl  flex flex-col items-center justify-center py-10 mt-10 max-sm:w-full">
+      {/* <section id="info" className="w-4/5 max-w-7xl  flex flex-col items-center justify-center py-10 mt-10 max-sm:w-full">
         <div className="flex flex-row items-center border border-slate-400 rounded-sm px-10 max-md:flex-col max-md:border-none">
           <Image
             src="/assets/schedule.svg"
@@ -123,7 +123,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
 {/*      <section className="w-4/5 h-15 flex flex-row items-center justify-center py-10 max-md:flex-col max-sm:w-full">
         <CountDownTimer targetDate={targetDate}/>
@@ -172,17 +172,17 @@ export default async function Home() {
           img="/assets/personal_data.jpg"
           desc="Enter your teammates' vital info. Player names, ages, emails, and mobile numbers – the essentials for a well-formed team. Precision ensures a seamless registration process."
         />
-        <Step 
+        {/* <Step 
           number="#4"
           title="Payment Process"
           img="/assets/payment.svg"
           desc="Secure your team's spot by scanning the QR Code and completing the registration fees payment. Upload you payment receipt(screenshot)."
-        />
+        /> */}
         <Step 
-          number="#5"
-          title="Payment Confirmation"
+          number="#4"
+          title="Team Confirmation"
           img="/assets/completed.svg"
-          desc="Await the email confirming your payment. Once received, victory is near! Your team is officially part of the cricket spectacle – ready to compete."
+          desc="Await the email confirming your registration. Once received, victory is near! Your team is officially part of the cricket spectacle – ready to compete."
         />
       </section>
       <section className="w-full bg-indigo-500 flex items-center justify-center py-16 ">
