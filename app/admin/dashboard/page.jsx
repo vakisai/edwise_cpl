@@ -50,7 +50,7 @@ const Dashboard=async()=>{
 
 
 	return(
-		<div className="flex flex-col w-full py-15 items-center">
+		<div className="flex flex-col w-full py-15 items-center mt-20">
 			<section className="flex flex-col w-4/5 my-10">
 				<p className="text-lg font-bold">Stats</p>	
 				<div className="flex items-center justify-between my-2 flex-wrap gap-5 max-sm:justify-center">
