@@ -84,7 +84,7 @@ const UserDetailSection=({data})=>{
 			</form>
 			<section className="flex items-center gap-5 max-md:flex-wrap">
 				<p onClick={()=>setState(()=>{ return {...defaultstate,all:true}})} className={`text-sm font-medium max-md:text-center max-md:h-full px-5 py-0.5 rounded-md border cursor-pointer ${state.all ? "bg-black text-white" : "text-black bg-white hover:bg-slate-100"}`}>All Users</p>
-				<p onClick={()=>setState(()=>{ return {...defaultstate,ppending:true}})} className={`text-sm font-medium max-md:text-center max-md:h-full px-5 py-0.5 rounded-md border cursor-pointer ${state.ppending ? "bg-black text-white" : "text-black bg-white hover:bg-slate-100"}`}>Payment Pending</p>
+				<p onClick={()=>setState(()=>{ return {...defaultstate,ppending:true}})} className={`text-sm font-medium max-md:text-center max-md:h-full px-5 py-0.5 rounded-md border cursor-pointer ${state.ppending ? "bg-black text-white" : "text-black bg-white hover:bg-slate-100"}`}>RegistrationPending</p>
 				<p onClick={()=>setState(()=>{ return {...defaultstate,vpending:true}})} className={`text-sm font-medium max-md:text-center max-md:h-full px-5 py-0.5 rounded-md border cursor-pointer ${state.vpending ? "bg-black text-white" : "text-black bg-white hover:bg-slate-100"}`}>Verification Pending</p>
 				<p onClick={()=>setState(()=>{ return {...defaultstate,verified:true}})} className={`text-sm font-medium max-md:text-center max-md:h-full px-5 py-0.5 rounded-md border cursor-pointer ${state.verified ? "bg-black text-white" : "text-black bg-white hover:bg-slate-100"}`}>Verified</p>
 			</section>
@@ -101,11 +101,11 @@ const UserDetailSection=({data})=>{
 			</div>
 			<Dialog isOpen={isOpen} setIsOpen={setIsOpen} >
 			 	<div className="flex flex-col py-7 px-4">
-			 		<p className="text-xl font-medium mb-5">Payment Receipt</p>
+			 		<p className="text-xl font-medium mb-5">Team logo</p>
 			 		<Image src={user?.receipt} height={400} width={200} alt="reciept" className="w-full h-auto rounded-sm mb-5" />
 			 		<div className="flex items-center w-full justify-evenly">
-			 			<p onClick={()=>handleVerification(false)} className="btn_black rounded-md">Mark Pending</p>
-			 			<p onClick={()=>handleVerification(true)} className="btn_success rounded-md">Mark Confirmed</p>
+			 			<p onClick={()=>handleVerification(false)} className="btn_black rounded-md">Mark unverified</p>
+			 			<p onClick={()=>handleVerification(true)} className="btn_success rounded-md">Mark verified</p>
 			 		</div>
 			 	</div>
 			</Dialog>

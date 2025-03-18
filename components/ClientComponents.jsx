@@ -140,10 +140,15 @@ const PaymentButton=({players,count,max})=>{
 	}
 
 	return (
+		// <button 
+		// onClick={handleClick}
+		// className="btn_black w-fit font-bold mb-10 rounded-sm">
+		// Proceed To Playment
+		// </button>
 		<button 
 		onClick={handleClick}
 		className="btn_black w-fit font-bold mb-10 rounded-sm">
-		Proceed To Playment
+		Proceed
 		</button>
 	);
 }
