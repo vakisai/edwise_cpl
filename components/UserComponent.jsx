@@ -33,3 +33,5 @@ const UserComponent=({user,setUser,setIsOpen})=>{
 		</div>
 	);
 }
+
+export default UserComponent;
