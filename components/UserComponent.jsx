@@ -6,7 +6,7 @@ const UserComponent=({user,setUser,setIsOpen})=>{
 	const bgColor=user.payment ? user.verified ? "bg-teal-100" : "bg-amber-100" : "bg-rose-100";
 	const textColor=user.payment ? user.verified ? "text-teal-600" : "text-amber-600" : "text-rose-600";
 	const dotColor=user.payment  ? user.verified ? "bg-teal-600" : "bg-amber-600" :"bg-rose-600";
-	const statusText=user.payment ? user.verified ? "Verified Payment" : "Verification Pending" : "Payment Pending";
+	const statusText=user.payment ? user.verified ? "Verified Team" : "Verification Pending" : "Pending";
 
 	return (
 		<div className="flex items-center border border-slate-400 shadow-sm gap-10 w-full justify-between px-5 py-1 rounded-md max-md:flex-col max-md:gap-2 max-md:py-5 relative">
@@ -22,15 +22,16 @@ const UserComponent=({user,setUser,setIsOpen})=>{
 				</span>
 			</div>
 			<div className="flex gap-5">
-				<p className="btn_black rounded-md">Team Details</p>
+				<p onClick={()=>{
+					naviagte('/team-details');
+				}}className="btn_black rounded-md">Team Details</p>
 				<p onClick={()=>{
 					setIsOpen(true);
 					setUser(user);
-				}} className={`btn_primary rounded-md ${user.payment ? "bg-indigo-500" : "bg-indigo-300 hover:bg-indigo-300 border-indigo-300 hover:text-white cursor-not-allowed select-none"}`}>{user.payment ? "View Reciept" : "No Reciept"}</p>
+				}} className={`btn_primary rounded-md ${user.payment ? "bg-indigo-500" : "bg-indigo-300 hover:bg-indigo-300 border-indigo-300 hover:text-white cursor-not-allowed select-none"}`}>{user.payment ? "View Logo" : "No Logo"}</p>
 			</div>
 		</div>
 	);
 }
-
 
 export default UserComponent;
