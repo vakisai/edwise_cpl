@@ -102,7 +102,7 @@ const Login = () => {
       password,
       redirect: false,
     });
-
+    console.log(res);
     if (res?.error) {
       console.error(res.error);
     } else {
