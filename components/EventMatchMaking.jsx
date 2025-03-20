@@ -1,103 +1,148 @@
+//updated matchmaking
 "use client";
-import React, { useEffect,useState } from 'react';
-import * as BV from 'brackets-viewer/dist/brackets-viewer.min.js'
-import "@components/brackets-viewer.css";
-import { InMemoryDatabase } from 'brackets-memory-db';
-import { BracketsManager } from 'brackets-manager';
+import React, { useEffect, useState } from "react";
+import { InMemoryDatabase } from "brackets-memory-db";
+import { BracketsManager } from "brackets-manager";
 
+const EventMatchMaking = ({ teams }) => {
+  const [storage, setStorage] = useState(null);
+  const [manager, setManager] = useState(null);
+  const [matches, setMatches] = useState([]);
+  const [selectedMatch, setSelectedMatch] = useState(null);
+  const [score1, setScore1] = useState("");
+  const [score2, setScore2] = useState("");
 
+  useEffect(() => {
+    const initializeTournament = async () => {
+      const teamNames = teams.map((team) => team.name);
+      if (teamNames.length < 2) {
+        console.error("At least two teams are required.");
+        return;
+      }
 
+      const strg = new InMemoryDatabase();
+      const mgr = new BracketsManager(strg);
 
-const EventMatchMaking=({teams})=>{
-    const [storage,setStorage]=useState();
-    const [manager,setManager]=useState();
+      await mgr.create.stage({
+        tournamentId: 3,
+        name: "Cricket Match",
+        type: "single_elimination",
+        seeding: teamNames,
+        settings: { grandFinal: "double" },
+      });
 
-    const teamNames=teams.map((team)=>team.name);
-    teamNames.pop();
-    teamNames.pop();
-    // console.log(teamNames[0])
-//     const teamNames = [
-//   "Solar Titans",
-//   "Thunder Hawks",
-//   "Quantum Warriors",
-//   "Velocity Vipers",
-//   "Nebula Nomads",
-//   "Inferno Dragons",
-//   "Zenith Zephyrs",
-//   "Galactic Guardians"
-// ];
-    console.log(teamNames.length)
+      setManager(mgr);
+      setStorage(strg);
+      updateFixtures(strg);
+    };
 
-  	useEffect(() => {
-        (async()=>{
-            const strg = new InMemoryDatabase();
-            const mgr = new BracketsManager(strg);
+    initializeTournament();
+  }, [teams]);
 
-            await mgr.create.stage({
-              tournamentId: 3,
-              name: 'Cricket Match',
-              type: 'single_elimination',
-              seeding: teamNames,
-              settings: { grandFinal: 'double' },
-            });
+  const updateFixtures = (storage) => {
+    const formattedMatches = storage.data.match.map((match) => ({
+      id: match.id,
+      team1: storage.data.participant.find((p) => p.id === match.opponent1?.id)?.name || "TBD",
+      team2: storage.data.participant.find((p) => p.id === match.opponent2?.id)?.name || "TBD",
+      score1: match.opponent1?.score || "0",
+      score2: match.opponent2?.score || "0",
+      result: match.opponent1?.result || "TBD",
+    }));
 
-            await mgr.update.match({
-              id: 0,
-              opponent1: { score: "▲", result: 'win' },
-              opponent2: { score: "▼" },
-            });
-            console.log(strg)
+    setMatches(formattedMatches);
+  };
 
-            window.bracketsViewer.render({
-              stages: strg.data.stage,
-              matches: strg.data.match,
-              matchGames: strg.data.match_game,
-              participants: strg.data.participant,
-            },{clear:true});
+  const updateMatch = async () => {
+    if (!manager || !storage || !selectedMatch || score1 === "" || score2 === "") return;
 
-            setManager(mgr);
-            setStorage(strg);
-        })()
-
-  	}, []);
-
-    const updateData=async(e)=>{
-        await manager.update.match({
-            id: 1,
-            opponent1: { score: "▲", result: 'win' },
-            opponent2: { score: "▼" },
-        });
-        await manager.update.match({
-            id: 2,
-            opponent1: { score: "▲", result: 'win' },
-            opponent2: { score: "▼" },
-        });
-        await manager.update.match({
-            id: 3,
-            opponent1: { score: "▲", result: 'win' },
-            opponent2: { score: "▼" },
-        });
-        await manager.update.match({
-            id: 4,
-            opponent1: { score: "▲", result: 'win' },
-            opponent2: { score: "▼" },
-        });
-        window.bracketsViewer.render({
-            stages: storage.data.stage,
-            matches: storage.data.match,
-            matchGames: storage.data.match_game,
-            participants: storage.data.participant,
-        },{clear:true});
+    const matchToUpdate = storage.data.match.find((m) => m.id === selectedMatch);
+    if (!matchToUpdate) {
+      console.error("Match not found");
+      return;
     }
 
-    return (
-        <>
-        <div className="w-5/6 flex flex-col items-center my-20">
-            <div className="brackets-viewer w-fit"></div>
-            <button onClick={updateData} className="btn_black rounded-sm">Update</button>
+    const winner = score1 > score2 ? "win" : score1 < score2 ? "loss" : "draw";
+
+    await manager.update.match({
+      id: selectedMatch,
+      opponent1: { score: parseInt(score1), result: winner === "win" ? "win" : winner === "loss" ? "loss" : "draw" },
+      opponent2: { score: parseInt(score2), result: winner === "loss" ? "win" : winner === "win" ? "loss" : "draw" },
+    });
+
+    updateFixtures(storage);
+    setScore1("");
+    setScore2("");
+    setSelectedMatch(null);
+  };
+
+  return (
+    <div className="w-full flex flex-col items-center mt-10">
+      <h2 className="text-xl font-bold mb-4">Cricket Tournament Bracket</h2>
+
+      {/* Match Selection */}
+      <div className="mb-4">
+        <label className="mr-2 font-semibold">Select Match:</label>
+        <select
+          value={selectedMatch || ""}
+          onChange={(e) => setSelectedMatch(Number(e.target.value))}
+          className="border px-2 py-1 rounded"
+        >
+          <option value="" disabled>Select a match</option>
+          {matches.map((match) => (
+            <option key={match.id} value={match.id}>
+              {match.team1} vs {match.team2}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Score Input */}
+      {selectedMatch && (
+        <div className="flex gap-4 mb-4">
+          <div>
+            <label className="block font-semibold">{matches.find(m => m.id === selectedMatch)?.team1}</label>
+            <input
+              type="number"
+              min="0"
+              value={score1}
+              onChange={(e) => setScore1(e.target.value)}
+              className="border px-2 py-1 rounded w-20"
+            />
+          </div>
+          <div>
+            <label className="block font-semibold">{matches.find(m => m.id === selectedMatch)?.team2}</label>
+            <input
+              type="number"
+              min="0"
+              value={score2}
+              onChange={(e) => setScore2(e.target.value)}
+              className="border px-2 py-1 rounded w-20"
+            />
+          </div>
         </div>
-        </>
-    )
-}
+      )}
+
+      {/* Update Button */}
+      <button
+        onClick={updateMatch}
+        className={`bg-black text-white px-4 py-2 rounded-md ${!selectedMatch ? "opacity-50 cursor-not-allowed" : ""}`}
+        disabled={!selectedMatch}
+      >
+        Update Score
+      </button>
+
+      {/* Bracket Structure */}
+      <div className="grid grid-cols-2 gap-4 mt-10 mb-10">
+        {matches.map((match) => (
+          <div key={match.id} className="border p-4 rounded-lg shadow-md text-center">
+            <p className="font-bold">{match.team1} vs {match.team2}</p>
+            <p>Score: {match.score1} - {match.score2}</p>
+            <p>Result: {match.result}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default EventMatchMaking;

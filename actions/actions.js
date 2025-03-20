@@ -184,6 +184,8 @@ export const handlePlayerForm=async(formData)=>{
 	}
 }
 
+
+//function to update the user payment status
 export const updateUserPaymentState=async(user_id,is_verified)=>{
 	try{
 		await connectToDB();

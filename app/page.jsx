@@ -10,7 +10,7 @@ import {redirect} from 'next/navigation'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Verification from '@components/Verification';
 import FAQComponent from '@components/FAQComponent';
-const CountDownTimer = dynamic(() => import('@components/CountDownTimer'), {ssr: false});
+// const CountDownTimer = dynamic(() => import('@components/CountDownTimer'), {ssr: false});
 import Step from '@components/Step'
 import frequentQuestions from '@utils/faqs.js';
 import Dialog from "@components/Dialog";
